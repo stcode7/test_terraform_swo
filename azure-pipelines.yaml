@@ -4,13 +4,13 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- master
 
 pool:
   vmImage: ubuntu-20.04
 
 steps:
-- script: echo Hello, world SWO123!
+- script: echo Hello, world SWO123fin!
   displayName: 'Run a one-line script'
 
 - script: |
