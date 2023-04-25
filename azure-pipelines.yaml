@@ -4,16 +4,19 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- master
 
 pool:
   vmImage: ubuntu-20.04
 
 steps:
-- script: echo Hello, world!
+- script: echo Hello, world SWO!
   displayName: 'Run a one-line script'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+  
+- script: echo test terraform!
+  displayName: 'Test terraformSWO'
