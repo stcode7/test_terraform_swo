@@ -12,33 +12,37 @@ pool:
 steps:
 
 - task: AWSShellScript@1
+  displayName: 'iniciar terraform'
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
     inlineScript: 'terraform init'
-    displayName: 'iniciar terraform'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
     
 - task: AWSShellScript@1
+  displayName: 'terraform plan'
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
     inlineScript: 'terraform plan -var-file=configuration/backend.tfvars'
-    displayName: 'plan de tteraform'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
     
 - task: AWSShellScript@1
+  displayName: 'terraform apply'
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
     inlineScript: 'terraform apply -var-file=configuration/backend.tfvars auto-approve'
-    displayName: 'terraform apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
     
 - task: AWSShellScript@1
+  displayName: 'finalizar con terraform'
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
     inlineScript: 'terraform destroy -var-file=configuration/backend.tfvars auto-approve'
-    displayName: 'finalizar con terraform'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
