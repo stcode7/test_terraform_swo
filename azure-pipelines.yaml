@@ -17,24 +17,28 @@ steps:
     regionName: 'us-east-1'
     scriptType: 'inline'
     inlineScript: 'terraform init'
+    displayName: 'iniciar terraform'
     
 - task: AWSShellScript@1
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
-    inlineScript: 'terraform plan -var-file=backend.tfvars'
+    inlineScript: 'terraform plan -var-file=configuration/backend.tfvars'
+    displayName: 'plan de tteraform'
     
 - task: AWSShellScript@1
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
-    inlineScript: 'terraform apply -var-file=backend.tfvars auto-approve'
+    inlineScript: 'terraform apply -var-file=configuration/backend.tfvars auto-approve'
+    displayName: 'terraform apply'
     
 - task: AWSShellScript@1
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
-    inlineScript: 'terraform destroy -var-file=backend.tfvars auto-approve'
+    inlineScript: 'terraform destroy -var-file=configuration/backend.tfvars auto-approve'
+    displayName: 'finalizar con terraform'
