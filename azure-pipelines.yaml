@@ -17,6 +17,7 @@ steps:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
+    disableAutoCwd: true
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
     inlineScript: 'terraform init'
     
