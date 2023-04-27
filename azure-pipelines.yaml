@@ -40,7 +40,7 @@ steps:
     scriptType: 'inline'
     disableAutoCwd: true
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
-    inlineScript: 'terraform apply -var-file="backend.tfvars" auto-approve'
+    inlineScript: 'terraform apply -var-file="backend.tfvars" -auto-approve'
 
     
 - task: AWSShellScript@1
@@ -51,4 +51,4 @@ steps:
     scriptType: 'inline'
     disableAutoCwd: true
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
-    inlineScript: 'terraform destroy -var-file="backend.tfvars" auto-approve'
+    inlineScript: 'terraform destroy -var-file="backend.tfvars" -auto-approve'
