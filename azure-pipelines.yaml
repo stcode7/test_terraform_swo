@@ -17,7 +17,6 @@ steps:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
-    disableAutoCwd: true
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
     inlineScript: 'terraform init'
     
@@ -28,7 +27,6 @@ steps:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
-    disableAutoCwd: true
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
     inlineScript: 'terraform plan -var-file="backend.tfvars"'
     
@@ -38,8 +36,9 @@ steps:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
-    inlineScript: 'terraform apply -var-file="backend.tfvars" auto-approve'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
+    inlineScript: 'terraform apply -var-file="backend.tfvars" auto-approve'
+
     
 - task: AWSShellScript@1
   displayName: 'finalizar con terraform'
@@ -47,5 +46,5 @@ steps:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
     scriptType: 'inline'
-    inlineScript: 'terraform destroy -var-file="backend.tfvars" auto-approve'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
+    inlineScript: 'terraform destroy -var-file="backend.tfvars" auto-approve'
