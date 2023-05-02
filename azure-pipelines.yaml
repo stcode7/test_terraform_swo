@@ -33,6 +33,7 @@ steps:
     inlineScript: 'terraform init'
     
 - ${{ if eq(parameters.action, 'deploy') }}:
+  
   - task: AWSShellScript@1
     displayName: 'terraform plan'
     inputs:
@@ -54,6 +55,7 @@ steps:
       inlineScript: 'terraform apply -var-file="backend.tfvars" -auto-approve'
 
 - ${{ if eq(parameters.action, 'destroy') }}:    
+
   - task: AWSShellScript@1
     displayName: 'finalizar con terraform'
     inputs:
