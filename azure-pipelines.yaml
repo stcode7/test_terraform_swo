@@ -20,8 +20,8 @@ parameters:
 
 
 variables:
- - name: action
-   value: deploy
+- name: action
+  value: deploy
 
 steps:
 
