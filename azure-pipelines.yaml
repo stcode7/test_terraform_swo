@@ -39,7 +39,7 @@ steps:
   
 - task: AWSShellScript@1
   displayName: 'terraform plan'
-  condition: eq(variables.action, 'deploy')
+  condition: eq(parameters.action, 'deploy')
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
