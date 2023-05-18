@@ -19,6 +19,9 @@ parameters:
   - destroy
 
 
+variables:
+ - name: action
+   value: deploy
 
 steps:
 
@@ -32,7 +35,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
     inlineScript: 'terraform init'
     
-- ${{ if eq(parameters.action, 'deploy') }}:
+- ${{ if eq(variables.action, 'deploy') }}:
   
   - task: AWSShellScript@1
     displayName: 'terraform plan'
@@ -54,7 +57,7 @@ steps:
       workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
       inlineScript: 'terraform apply -var-file="backend.tfvars" -auto-approve'
 
-- ${{ if eq(parameters.action, 'destroy') }}:    
+- ${{ if eq(variables.action, 'destroy') }}:    
 
   - task: AWSShellScript@1
     displayName: 'finalizar con terraform'
