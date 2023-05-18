@@ -35,36 +35,39 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
     inlineScript: 'terraform init'
     
-- ${{ if eq(variables.action, 'deploy') }}:
+#- ${{ if eq(variables.action, 'deploy') }}:
   
-  - task: AWSShellScript@1
-    displayName: 'terraform plan'
-    inputs:
-      awsCredentials: 'Test_AWS_Terraform'
-      regionName: 'us-east-1'
-      scriptType: 'inline'
-      disableAutoCwd: true
-      workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
-      inlineScript: 'terraform plan -var-file="backend.tfvars"'
+- task: AWSShellScript@1
+  displayName: 'terraform plan'
+  condition: eq(variables[action], 'deploy')
+  inputs:
+    awsCredentials: 'Test_AWS_Terraform'
+    regionName: 'us-east-1'
+    scriptType: 'inline'
+    disableAutoCwd: true
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
+    inlineScript: 'terraform plan -var-file="backend.tfvars"'
 
-  - task: AWSShellScript@1
-    displayName: 'terraform apply'
-    inputs:
-      awsCredentials: 'Test_AWS_Terraform'
-      regionName: 'us-east-1'
-      scriptType: 'inline'
-      disableAutoCwd: true
-      workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
-      inlineScript: 'terraform apply -var-file="backend.tfvars" -auto-approve'
+- task: AWSShellScript@1
+  displayName: 'terraform apply'
+  condition: eq(variables[action], 'deploy')
+  inputs:
+    awsCredentials: 'Test_AWS_Terraform'
+    regionName: 'us-east-1'
+    scriptType: 'inline'
+    disableAutoCwd: true
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
+    inlineScript: 'terraform apply -var-file="backend.tfvars" -auto-approve'
 
-- ${{ if eq(variables.action, 'destroy') }}:    
+#- ${{ if eq(variables.action, 'destroy') }}:    
 
-  - task: AWSShellScript@1
-    displayName: 'finalizar con terraform'
-    inputs:
-      awsCredentials: 'Test_AWS_Terraform'
-      regionName: 'us-east-1'
-      scriptType: 'inline'
-      disableAutoCwd: true
-      workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
-      inlineScript: 'terraform destroy -var-file="backend.tfvars" -auto-approve'
+- task: AWSShellScript@1
+  displayName: 'finalizar con terraform'
+  condition: eq(variables[action], 'destroy')
+  inputs:
+    awsCredentials: 'Test_AWS_Terraform'
+    regionName: 'us-east-1'
+    scriptType: 'inline'
+    disableAutoCwd: true
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/'
+    inlineScript: 'terraform destroy -var-file="backend.tfvars" -auto-approve'
