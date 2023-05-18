@@ -39,7 +39,7 @@ steps:
   
 - task: AWSShellScript@1
   displayName: 'terraform plan'
-  condition: eq(parameters['action'], 'deploy')
+  condition: eq(variables['action'], 'deploy')
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
@@ -50,7 +50,7 @@ steps:
 
 - task: AWSShellScript@1
   displayName: 'terraform apply'
-  condition: eq(variables[action], 'deploy')
+  condition: eq(variables['action'], 'deploy')
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
@@ -63,7 +63,7 @@ steps:
 
 - task: AWSShellScript@1
   displayName: 'finalizar con terraform'
-  condition: eq(variables[action], 'destroy')
+  condition: eq(variables['action'], 'destroy')
   inputs:
     awsCredentials: 'Test_AWS_Terraform'
     regionName: 'us-east-1'
