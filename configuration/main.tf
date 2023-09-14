@@ -7,7 +7,7 @@ resource "aws_s3_bucket" "bucket-state" {
 
     tags = {
         Description  = "Bucket que almacena el backend de Terraform en la cuenta"
-        Environment  = "Desarrollo"
+        Environment  = "Test"
         CreationDate = var.date
 
     }
